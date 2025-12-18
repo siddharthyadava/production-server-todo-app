@@ -2,7 +2,6 @@ const userModel = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const JWT = require("jsonwebtoken");
 const crypto = require("crypto");
-const sendEmail = require("../utils/sendEmail")
 
 // REGISTER
 const registerController = async (req, res) => {
@@ -127,13 +126,6 @@ const forgotPasswordController = async (req, res) => {
     // TODO: send email here using nodemailer or any email service
     // For now, log it so you can test:
     console.log("Password reset link:", resetUrl);
-
-    await sendEmail({
-      to: user.email,
-      subject: "Password Reset Link",
-      html: `<p>Click to reset password:</p>
-            <a href="${resetUrl}">${resetUrl}</a>`
-    });
 
 
     return res.status(200).send({
